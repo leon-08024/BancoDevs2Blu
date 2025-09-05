@@ -25,7 +25,7 @@ create table DOCUMENTO_IMOVEL(
 );
 
 create table IMAGEM_IMOVEL(
-	id int,
+	id int primary key,
     Url varchar(255),
     IMOVEl_id int,
     constraint FK_IMAGEM_IMOVEL_IMOVEL foreign key (IMOVEL_id) references IMOVEL(id)
@@ -91,3 +91,66 @@ CREATE TABLE PAIS (
     id INT PRIMARY KEY,
     Nome varchar(255)
 );
+
+
+create table bolinha(
+	id int primary key,
+    nome varchar(255)
+);
+
+alter table bolinha add column coluna varchar(255);
+alter table bolinha modify coluna text;
+alter table bolinha drop column coluna; 
+
+create table bolinha2(
+	id int primary key,
+	nome varchar(255)
+);
+
+alter table bolinha add column bolinha2_id int;
+alter table bolinha add constraint fk_bolinha_bolinha2 foreign key (bolinha2_id) references bolinha2(id);
+
+alter table bolinha drop foreign key fk_bolinha_bolinha2; 
+drop table bolinha2;
+drop table bolinha;
+
+alter table DOCUMENTO_IMOVEL modify id int primary key;
+alter table BAIRRO add constraint FK_BAIRRO_ESTADO foreign key (CIDADE_id) references ESTADO(id);
+alter table BAIRRO drop foreign key FK_BAIRRO_ESTADO;
+alter table CIDADE add constraint FK_CIDADE_ESTADO foreign key (ESTADO_id) references ESTADO(id);
+alter table ESTADO add constraint FK_ESTADO_PAIS foreign key (PAIS_id) references PAIS(id);
+
+alter table IMOVEL modify TAMANHO_M2 decimal not null;
+alter table IMOVEL modify Rua varchar(255) not null;
+alter table IMOVEL modify Numero int not null;
+
+alter table DOCUMENTO_IMOVEL modify Tipo varchar(255) not null;
+alter table DOCUMENTO_IMOVEL modify Data date not null;
+
+alter table IMAGEM_IMOVEL modify Url varchar(255) not null;
+
+alter table TIPO_IMOVEL modify Tipo varchar(255) not null;
+
+alter table CONTRATO modify Data date not null;
+alter table CONTRATO modify situacao tinyint not null;
+
+alter table PAGAMENTO modify Valor decimal not null;
+alter table PAGAMENTO modify FormaPagamento Enum('Pix', 'Boleto', 'Transferencia', 'Credito', 'Debito', 'Dinhero') not null;
+
+alter table PESSOA modify Nome varchar(255);
+alter table PESSOA modify TipoDocumento ENUM('Fisica', 'Juridica') not null;
+alter table PESSOA modify Documento varchar(255) not null;
+alter table PESSOA modify Emai varchar(255) not null;
+alter table PESSOA modify Telefone varchar(255) not null;
+alter table PESSOA modify Rua varchar(255) not null;
+alter table PESSOA modify Numero INT not null;
+
+
+
+
+
+
+
+
+
+
